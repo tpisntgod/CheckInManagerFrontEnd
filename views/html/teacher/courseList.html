@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>课程列表</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="/css/teacher/courseListPageStyle.css">
+  
+
+</head>
+   
+<body>
+<div id="Courses">
+  <div id="topBar" >
+    <img id="bookIMG" src="/pic/teacher/book.png">
+    <p id="heading">教师系统</p>
+    <ul>
+      <li id="teacherHeadList">
+      <img src="/pic/teacher/defaultHead.png" id="teacherHead" />
+        <ul id="teacherHeadUL">
+          <li><a href="">账户设置</a></li>
+          <li><a href="">退出登录</a></li>
+        </ul>
+      </li>
+      <div>
+          <p id="welcomeInfo" >{{  username  }}，欢迎您！</p>S
+      </div>
+      
+    </ul>
+  </div>
+
+
+  <div id="bodyBlock">
+      <p id="title">已开设的课程</p>
+      
+      <table>  
+        <tr>
+          <td v-for = "course in courses">
+            
+            <a class="name" href="" >{{  course.course_name  }}</a>
+            <p class="time">{{  course.semester }}</p>
+          </td>
+        </tr> 
+      </table>
+  </div>
+</div>  
+      <script src="/scripts/vue.js"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="/scripts/teacher/courseList.js"></script>
+ 
+</body>
+</html>
