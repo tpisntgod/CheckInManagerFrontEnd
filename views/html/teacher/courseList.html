@@ -17,12 +17,12 @@
       <li id="teacherHeadList">
       <img src="/pic/teacher/defaultHead.png" id="teacherHead" />
         <ul id="teacherHeadUL">
-          <li><a href="">账户设置</a></li>
-          <li><a href="">退出登录</a></li>
+          <li class="topbar-item">修改密码</li>
+          <li class="topbar-item" v-on:click="quitLogin">退出登录</li>
         </ul>
       </li>
       <div>
-          <p id="welcomeInfo" >{{  username  }}，欢迎您！</p>S
+          <p id="welcomeInfo" >{{  username  }}，欢迎您！</p>
       </div>
       
     </ul>
@@ -44,7 +44,7 @@
   </div>
 </div>  
       <script src="/scripts/vue.js"></script>
-      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="/scripts/axios.min.js"></script>
       <script src="/scripts/teacher/courseList.js"></script>
  
 </body>

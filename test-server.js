@@ -10,8 +10,12 @@ const app = new Koa();
 
 console.log(path.join(__dirname, 'views'));
 const main = serve(path.join(__dirname, '/views'));
+const bodyParser = require('koa-bodyparser');
 // 静态文件处理
 app.use(main);
+
+// 解析request的body
+app.use(bodyParser());
 
 // log request URL:
 app.use(async (ctx, next) => {
@@ -28,7 +32,6 @@ router.get('/course', async (ctx, next) => {
     
 });
 
-
 // add url-route:
 router.get('/user/login', async (ctx, next) => {
     console.log('login router');
@@ -36,7 +39,6 @@ router.get('/user/login', async (ctx, next) => {
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./views/html/login.html');
 });
-
 
 router.get('/api/course', async (ctx, next) => {
     console.log('login router');
@@ -62,16 +64,25 @@ router.get('/api/course', async (ctx, next) => {
 
 });
 
-
 router.post('/api/users/session',  async (ctx, next) => {
     console.log('login check');
-    ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
+    ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg', {
+            maxAge: 3600*1000 ,
+            httpOnly: false
+        }
+    );
+    console.log('ctx.request:',ctx.request);
+    console.log('ctx.request.body:',ctx.request.body);
+    console.log('user id:',ctx.request.body.user_id,' password:',ctx.request.body.password);
     /*ctx.response.type = 'json';
     ctx.response.body = {message: 'empty username or password'};*/
     ctx.response.status = 200;
 });
 
-
+router.delete('/api/users/session', async (ctx, next) => {
+    console.log('/api/users/session');
+    ctx.response.status = 204;
+})
 
 router.get('/', async (ctx, next) => {
    // ctx.response.body = '<h1>Index</h1>';

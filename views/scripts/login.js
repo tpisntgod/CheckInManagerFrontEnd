@@ -34,7 +34,7 @@ var loginform = new Vue({
             .then(function (response) {
                 console.log(response.status);
                 if (response.status == 200) {
-                    window.location="/user";
+                    window.location="/course";
                 }
             })
             .catch(function (error) {

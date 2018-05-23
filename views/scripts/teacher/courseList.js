@@ -10,8 +10,17 @@ var courselist = new Vue({
         ]
     },
     methods:{
-    	
-
+    	quitLogin: function() {
+            console.log('cookie',document.cookie);
+            axios.delete('/api/users/session')
+            .then(function (response) {
+                console.log(response.status);
+                window.location="/";
+            })
+            .catch(function (error) {
+                alert(response.data);
+            });
+        }
     },
     created(){
         let that = this;
@@ -28,7 +37,3 @@ var courselist = new Vue({
     }
     
 });
-
-
-
-
