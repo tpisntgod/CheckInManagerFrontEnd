@@ -1,5 +1,5 @@
 var changePasswordform = new Vue({
-    el: '#bodyBottom',
+    el: '#modifyDiv',
     data: {
         em1: '',
         em2: '',
@@ -10,8 +10,6 @@ var changePasswordform = new Vue({
     },
     methods: {
         checkInput: function() {
-            
-
             //p>0时为出错
             //前端需要检查做新密码两次输入是否一致、检查是否输入为空
             var p = 0;
@@ -60,6 +58,9 @@ var changePasswordform = new Vue({
                 //alert(error.status);
                 console.log(error.response.status);
             });
+        },
+        back:function () {
+             window.location="/course";
         }
     }
 });
