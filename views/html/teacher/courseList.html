@@ -17,12 +17,12 @@
       <li id="teacherHeadList">
       <img src="/pic/teacher/defaultHead.png" id="teacherHead" />
         <ul id="teacherHeadUL">
-          <li class="topbar-item">修改密码</li>
+          <li class="topbar-item" v-on:click="changPassword">修改密码</li>
           <li class="topbar-item" v-on:click="quitLogin">退出登录</li>
         </ul>
       </li>
       <div>
-          <p id="welcomeInfo" >{{  username  }}，欢迎您！</p>
+          <p id="welcomeInfo" > 这个名字由登录返回，欢迎您！</p>
       </div>
       
     </ul>
@@ -36,7 +36,7 @@
         <tr>
           <td v-for = "course in courses">
             
-            <a class="name" href="" >{{  course.course_name  }}</a>
+            <p class="name"  v-on:click="jump(course.course_id)" >{{  course.course_name  }}</p>
             <p class="time">{{  course.semester }}</p>
           </td>
         </tr> 

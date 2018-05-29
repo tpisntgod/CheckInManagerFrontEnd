@@ -40,29 +40,49 @@ router.get('/user/login', async (ctx, next) => {
     ctx.response.body = fs.createReadStream('./views/html/login.html');
 });
 
-router.get('/api/course', async (ctx, next) => {
-    console.log('login router');
-    console.log('getting courses...');
-    //console.log(__dirname);
-    ctx.response.status = 200;
-    ctx.response.type = 'json';
-    ctx.response.body = JSON.stringify({
-            username:'衣杨',
-            courses:[
-            {
-                course_id:'1', 
-                course_name:'数据挖掘',
-                semester:'2017-2018学年度第二学期'
-            },
-            {
-                course_id:'2', 
-                course_name:'数值计算',
-                semester:'2016-2017学年度第一学期'
-            }
-        ]
-    });
 
+router.get('/user/change_password', async (ctx, next) => {
+    console.log('login router');
+    //console.log(__dirname);
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/teacher/changePasswordPage.html');
 });
+
+
+router.patch('/api/user/password', async (ctx, next) => {
+    console.log('change password check...');
+    //console.log(__dirname);
+    ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
+    ctx.response.status = 201;
+    console.log('ctx.request:',ctx.request);
+    console.log('ctx.request.body:',ctx.request.body);
+});
+
+
+router.get('/course/:course_id', async (ctx, next) => {
+    console.log('login router');
+    console.log('getting a course...');
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/teacher/courseDetail.html');
+});
+
+//学生名单界面
+router.get('/course/:course_id/course_member', async (ctx, next) => {
+    console.log('login router');
+    console.log('getting students names...');
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/teacher/studentNameLlistPage.html');
+});
+
+//课程签到历史界面
+router.get('/course/:course_id/checkin_student', async (ctx, next) => {
+    console.log('login router');
+    console.log('getting attendance history...');
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/teacher/checkAttendancePage.html');
+});
+
+
 
 router.post('/api/users/session',  async (ctx, next) => {
     console.log('login check');
@@ -76,19 +96,22 @@ router.post('/api/users/session',  async (ctx, next) => {
     console.log('user id:',ctx.request.body.user_id,' password:',ctx.request.body.password);
     /*ctx.response.type = 'json';
     ctx.response.body = {message: 'empty username or password'};*/
-    ctx.response.status = 200;
+    ctx.response.status = 201;
 });
+
 
 router.delete('/api/users/session', async (ctx, next) => {
     console.log('/api/users/session');
     ctx.response.status = 204;
 })
 
+
 router.get('/', async (ctx, next) => {
    // ctx.response.body = '<h1>Index</h1>';
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./views/html/initial.html');
 });
+
 
 // add router middleware:
 app.use(router.routes());

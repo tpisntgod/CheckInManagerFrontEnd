@@ -33,7 +33,7 @@ var loginform = new Vue({
             })
             .then(function (response) {
                 console.log(response.status);
-                if (response.status == 200) {
+                if (response.status == 201) {
                     window.location="/course";
                 }
             })
