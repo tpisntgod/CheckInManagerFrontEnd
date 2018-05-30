@@ -33,7 +33,9 @@
     "log4js": "^2.5.3",
     "mysql": "^2.15.0",
     "redis": "^2.8.0",
-    "request": "^2.85.0"
+    "request": "^2.85.0",
+    "vue": "^2.5.16",
+    "vue-server-renderer": "^2.5.16"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

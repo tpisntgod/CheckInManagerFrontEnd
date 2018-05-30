@@ -3,6 +3,30 @@ const fs = require('fs');
 const path = require('path');
 const serve = require('koa-static');
 
+// Vue官网教程:https://ssr.vuejs.org/zh/guide/  渲染一个 Vue 实例
+// 第 1 步：创建一个 Vue 实例
+const Vue = require('vue')
+const vue_app = new Vue({
+  template: `<div>Hello World</div>`
+})
+
+// 第 2 步：创建一个 renderer
+const renderer = require('vue-server-renderer').createRenderer()
+
+// 第 3 步：将 Vue 实例渲染为 HTML
+renderer.renderToString(vue_app, (err, html) => {
+    if (err) throw err
+    console.log(html)
+    // => <div data-server-rendered="true">Hello World</div>
+})
+
+// 在 2.5.0+，如果没有传入回调函数，则会返回 Promise：
+renderer.renderToString(vue_app).then(html => {
+    console.log(html)
+}).catch(err => {
+    console.error(err)
+})
+
 // 注意require('koa-router')返回的是函数:
 const router = require('koa-router')();
 
@@ -103,8 +127,32 @@ router.post('/api/users/session',  async (ctx, next) => {
 router.delete('/api/users/session', async (ctx, next) => {
     console.log('/api/users/session');
     ctx.response.status = 204;
-})
+});
 
+router.get('/vue_ssr_test', async (ctx, next) => {
+    const vue_app = new Vue({
+        data: {
+            url : ctx.request.url
+        },
+        template: `<div>访问的 URL 是： {{ url }}</div>`
+    })
+
+    renderer.renderToString(vue_app, (err, html) => {
+        if (err) {
+            console.log(err);
+            ctx.response.status = 500;
+            ctx.response.body = 'Internal Server Error';
+            return
+        }
+        ctx.response.body = `
+            <!DOCTYPE html>
+            <html lang="en">
+                <head><title>Hello</title></head>
+                <body>${html}</body>
+            </html>
+        `;
+    })
+});
 
 router.get('/', async (ctx, next) => {
    // ctx.response.body = '<h1>Index</h1>';
