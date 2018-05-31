@@ -1,5 +1,5 @@
 var changePasswordform = new Vue({
-    el: '#modifyDiv',
+    el: '#changePassword',
     data: {
         em1: '',
         em2: '',
@@ -61,6 +61,20 @@ var changePasswordform = new Vue({
         },
         back:function () {
              window.location="/course";
+        },
+        quitLogin: function() {
+            console.log('cookie',document.cookie);
+            axios.delete('/api/users/session')
+            .then(function (response) {
+                console.log(response.status);
+                window.location="/";
+            })
+            .catch(function (error) {
+                alert(response.data);
+            });
+        },
+        changPassword:function() {
+            window.location="/user/change_password";
         }
     }
 });
