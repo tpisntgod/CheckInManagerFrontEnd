@@ -208,6 +208,19 @@ router.get('/', async (ctx, next) => {
 });
 
 
+router.get('/user/add_user', async (ctx, next) => {
+    console.log('login manager addStudent router');
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/manager/addStudentPage.html');
+});
+
+router.post('/api/user',  async (ctx, next) => {
+    console.log('add student check');
+    ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
+    ctx.response.status = 201;
+});
+
+
 // add router middleware:
 app.use(router.routes());
 
