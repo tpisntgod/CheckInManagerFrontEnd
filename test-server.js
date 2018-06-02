@@ -6,26 +6,10 @@ const serve = require('koa-static');
 // Vue官网教程:https://ssr.vuejs.org/zh/guide/  渲染一个 Vue 实例
 // 第 1 步：创建一个 Vue 实例
 const Vue = require('vue')
-const vue_app = new Vue({
-  template: `<div>Hello World</div>`
-})
 
 // 第 2 步：创建一个 renderer
-const renderer = require('vue-server-renderer').createRenderer()
-
-// 第 3 步：将 Vue 实例渲染为 HTML
-renderer.renderToString(vue_app, (err, html) => {
-    if (err) throw err
-    console.log(html)
-    // => <div data-server-rendered="true">Hello World</div>
-})
-
-// 在 2.5.0+，如果没有传入回调函数，则会返回 Promise：
-renderer.renderToString(vue_app).then(html => {
-    console.log(html)
-}).catch(err => {
-    console.error(err)
-})
+const render = require('vue-server-renderer');
+const renderer = render.createRenderer()
 
 // 注意require('koa-router')返回的是函数:
 const router = require('koa-router')();
@@ -35,11 +19,6 @@ const app = new Koa();
 console.log(path.join(__dirname, 'views'));
 const main = serve(path.join(__dirname, '/views'));
 const bodyParser = require('koa-bodyparser');
-// 静态文件处理
-app.use(main);
-
-// 解析request的body
-app.use(bodyParser());
 
 // log request URL:
 app.use(async (ctx, next) => {
@@ -47,14 +26,19 @@ app.use(async (ctx, next) => {
     await next();
 });
 
-//定位到教师登陆后的主界面'/course'
-router.get('/course', async (ctx, next) => {
-    console.log('login router');
-    //console.log(__dirname);
-    ctx.response.type = 'html';
-    ctx.response.body = fs.createReadStream('./views/html/teacher/courseList.html');
-    
+// 静态文件处理
+app.use(main);
+
+// 解析request的body
+app.use(bodyParser());
+
+/*
+// log request URL:
+app.use(async (ctx, next) => {
+    console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
+    await next();
 });
+*/
 
 // add url-route:
 router.get('/user/login', async (ctx, next) => {
@@ -64,14 +48,11 @@ router.get('/user/login', async (ctx, next) => {
     ctx.response.body = fs.createReadStream('./views/html/login.html');
 });
 
-
 router.get('/user/change_password', async (ctx, next) => {
-    console.log('login router');
     //console.log(__dirname);
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./views/html/teacher/changePasswordPage.html');
 });
-
 
 router.patch('/api/user/password', async (ctx, next) => {
     console.log('change password check...');
@@ -82,9 +63,7 @@ router.patch('/api/user/password', async (ctx, next) => {
     console.log('ctx.request.body:',ctx.request.body);
 });
 
-
 router.get('/course/:course_id', async (ctx, next) => {
-    console.log('login router');
     console.log('getting a course...');
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./views/html/teacher/courseDetail.html');
@@ -92,7 +71,6 @@ router.get('/course/:course_id', async (ctx, next) => {
 
 //学生名单界面
 router.get('/course/:course_id/course_member', async (ctx, next) => {
-    console.log('login router');
     console.log('getting students names...');
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./views/html/teacher/studentNameLlistPage.html');
@@ -100,13 +78,10 @@ router.get('/course/:course_id/course_member', async (ctx, next) => {
 
 //课程签到历史界面
 router.get('/course/:course_id/checkin_student', async (ctx, next) => {
-    console.log('login router');
     console.log('getting attendance history...');
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./views/html/teacher/checkAttendancePage.html');
 });
-
-
 
 router.post('/api/users/session',  async (ctx, next) => {
     console.log('login check');
@@ -123,35 +98,107 @@ router.post('/api/users/session',  async (ctx, next) => {
     ctx.response.status = 201;
 });
 
-
 router.delete('/api/users/session', async (ctx, next) => {
     console.log('/api/users/session');
     ctx.response.status = 204;
 });
 
+// vue ssr 服务端渲染 测试
 router.get('/vue_ssr_test', async (ctx, next) => {
-    const vue_app = new Vue({
+    const tem = new Vue({
         data: {
-            url : ctx.request.url
+            url : ctx.request.url,
+            title: 'vue ssr template test'
         },
-        template: `<div>访问的 URL 是： {{ url }}</div>`
+        template: fs.readFileSync('./views/html/teacher/changePasswordPage.html', 'utf-8')
     })
 
-    renderer.renderToString(vue_app, (err, html) => {
+    renderer.renderToString(tem, (err, html) => {
         if (err) {
             console.log(err);
             ctx.response.status = 500;
             ctx.response.body = 'Internal Server Error';
-            return
+            return;
         }
-        ctx.response.body = `
-            <!DOCTYPE html>
-            <html lang="en">
-                <head><title>Hello</title></head>
-                <body>${html}</body>
-            </html>
-        `;
+        ctx.response.body = html;
     })
+});
+
+router.get('/course_front', async (ctx, next) => {
+    console.log('front render course list page');
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/teacher/courseList.html');
+});
+
+router.get('/course_front/data', async (ctx, next) => {
+    console.log('return course list page data as json');
+    ctx.response.type = 'json';
+    ctx.response.body = JSON.stringify({
+        username:'衣杨',
+        courses:[
+            {
+                course_id:'1', 
+                course_name:'数据挖掘',
+                semester:'2017-2018学年度第二学期'
+            },
+            {
+                course_id:'2', 
+                course_name:'数值计算',
+                semester:'2016-2017学年度第一学期'
+            }
+        ]
+    });
+});
+
+//const mdzz = fs.readFileSync('./views/html/teacher/courseList_markup.html', 'utf-8');
+//console.log('mdzz')
+//console.log(mdzz);
+
+//创建 renderer 时提供一个页面模板
+const courseList_renderer = render.createRenderer({
+    template: require('fs').readFileSync('./views/html/teacher/courseList_template.html', 'utf-8')
+})
+
+//定位到教师登陆后的主界面'/course'
+router.get('/course', async (ctx, next) => {
+    console.log('course router');
+    //console.log(__dirname);
+
+    /*ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/teacher/courseList.html');*/
+
+    const tem = new Vue({
+        //el:'#Courses',
+        data:{
+            courses:[
+                {
+                    course_id:'1', 
+                    course_name:'数据挖掘',
+                    semester:'2017-2018学年度第二学期'
+                },
+                {
+                    course_id:'2', 
+                    course_name:'系统分析与设计',
+                    semester:'2017-2018学年度第一学期'
+                }
+            ]
+        },
+        template: fs.readFileSync('./views/html/teacher/courseList_markup.html', 'utf-8')
+    })
+
+    courseList_renderer.renderToString(tem, (err, html) => {
+        if (err) {
+            console.log(err);
+            ctx.response.status = 500;
+            ctx.response.body = 'Internal Server Error';
+            return;
+        }
+        ctx.response.body = html;
+        console.log('courseList html');
+        console.log(html);
+
+    })
+    
 });
 
 router.get('/', async (ctx, next) => {

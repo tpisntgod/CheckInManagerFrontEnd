@@ -42,5 +42,8 @@ var loginform = new Vue({
                 console.log(error.response.status);
             });
         }
+    },
+    created(){
+      alert('mdzz');
     }
 });
