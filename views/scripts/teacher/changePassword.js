@@ -37,12 +37,11 @@ var changePasswordform = new Vue({
                 changePasswordform.em3 = '两次密码不一样！';
             }
 
-
-            
+            alert('checkinput');
+            alert('p',p);
             if (p>0) {
                 return false;
             };
-
             console.log('patch');
             axios.patch('/api/user/password', {
                 'old_password': changePasswordform.oldpw,
@@ -78,3 +77,32 @@ var changePasswordform = new Vue({
         }
     }
 });
+
+function checkInput_jq() {
+    console.log('patch');
+    axios.patch('/api/user/password', {
+        'old_password': changePasswordform.oldpw,
+        'password': changePasswordform.newpw
+    })
+    .then(function (response) {
+        console.log(response.status);
+        if (response.status == 201) {
+            window.location="/user/login";
+        }
+    })
+    .catch(function (error) {
+        //alert(error.status);
+        console.log(error.response.status);
+    });
+}
+
+function addEvents() {
+    //alert('addevents');
+    //alert(changePasswordform.checkInput);
+    console.log(changePasswordform.checkInput);
+    //alert($("#ensurePost").val());
+    //$("#ensurePost").click(changePasswordform.checkInput);
+    $("#ensurePost").click(checkInput_jq);
+}
+
+$(document).ready(addEvents);
