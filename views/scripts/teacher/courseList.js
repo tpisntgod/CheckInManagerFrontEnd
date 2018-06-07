@@ -1,3 +1,4 @@
+// 这个Vue实例，没有作用
 var courselist = new Vue({
     el:'#Courses',
     data: {
@@ -41,34 +42,10 @@ var courselist = new Vue({
         }
     },
     created(){
-        //alert('vue created');
-        let that = this;
-        axios.get('course_front/data')
-        .then(function (response) {
-            console.log(response);
-            console.log('response.data',response.data);
-            console.log('response.status',response.status);
-            that.courses = response.data.courses;
-            that.username = response.data.username;
-            //this.data.courses = response.data;
-        })
-        .catch(function (error) {
-            console.log('course_front/data',error);
-        });
-/*
-        let that = this;
-        axios.defaults.withCredentials = true;
-        axios.get('/api/course')
-        .then(function (response) {
-            console.log(response);
-            that.courses = response.data.courses;
-            that.username = response.data.username;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });*/
+
     }
 });
+//上面的Vue实例，目前没有作用
 
 function addEvents() {
     $(".name").click(function() {

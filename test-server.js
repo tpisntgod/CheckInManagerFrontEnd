@@ -32,14 +32,6 @@ app.use(main);
 // 解析request的body
 app.use(bodyParser());
 
-/*
-// log request URL:
-app.use(async (ctx, next) => {
-    console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
-    await next();
-});
-*/
-
 // add url-route:
 router.get('/user/login', async (ctx, next) => {
     console.log('login router');
@@ -124,6 +116,8 @@ router.get('/vue_ssr_test', async (ctx, next) => {
     })
 });
 
+/*
+前端渲染，之后删除
 router.get('/course_front', async (ctx, next) => {
     console.log('front render course list page');
     ctx.response.type = 'html';
@@ -149,10 +143,7 @@ router.get('/course_front/data', async (ctx, next) => {
         ]
     });
 });
-
-//const mdzz = fs.readFileSync('./views/html/teacher/courseList_markup.html', 'utf-8');
-//console.log('mdzz')
-//console.log(mdzz);
+*/
 
 //创建 renderer 时提供一个页面模板
 const courseList_renderer = render.createRenderer({
@@ -166,7 +157,6 @@ router.get('/course', async (ctx, next) => {
 
     /*ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./views/html/teacher/courseList.html');*/
-
     const tem = new Vue({
         //el:'#Courses',
         data:{
@@ -182,7 +172,6 @@ router.get('/course', async (ctx, next) => {
                     semester:'2017-2018学年度第一学期'
                 }
             ]
-            //seen: false
         },
         template: fs.readFileSync('./views/html/teacher/courseList_markup.html', 'utf-8')
     })
