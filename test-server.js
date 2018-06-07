@@ -182,6 +182,7 @@ router.get('/course', async (ctx, next) => {
                     semester:'2017-2018学年度第一学期'
                 }
             ]
+            //seen: false
         },
         template: fs.readFileSync('./views/html/teacher/courseList_markup.html', 'utf-8')
     })

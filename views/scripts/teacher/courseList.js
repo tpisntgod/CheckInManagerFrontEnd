@@ -69,3 +69,11 @@ var courselist = new Vue({
         });*/
     }
 });
+
+function addEvents() {
+    $(".name").click(function() {
+        window.location='/course/'+$(this).children().text(); 
+    });
+}
+
+$(document).ready(addEvents);

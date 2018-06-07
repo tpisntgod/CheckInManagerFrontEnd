@@ -25,8 +25,10 @@
       <table>  
         <tr>
           <td v-for = "course in courses">
-            
-            <p class="name"  v-on:click="jump(course.course_id)" >{{  course.course_name  }}</p>
+            <p class="name"  v-on:click="jump(course.course_id)" >
+              {{  course.course_name  }}
+              <span class="courseID" hidden="hidden">{{ course.course_id}}</span>
+            </p>
             <p class="time">{{  course.semester }}</p>
           </td>
         </tr> 

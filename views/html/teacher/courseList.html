@@ -33,8 +33,10 @@
       <table>  
         <tr>
           <td v-for = "course in courses">
-            
-            <p class="name"  v-on:click="jump(course.course_id)" >{{  course.course_name  }}</p>
+            <p class="name"  v-on:click="jump(course.course_id)" >
+                {{  course.course_name  }}
+                <span class="courseID" hidden="hidden">{{ course.course_id}}</span>
+            </p>
             <p class="time">{{  course.semester }}</p>
           </td>
         </tr> 
@@ -43,40 +45,8 @@
 </div>  
       <script src="/scripts/vue.js"></script>
       <script src="/scripts/axios.min.js"></script>
+      <script src="/scripts/jquery-3.3.1.js"></script>
       <script src="/scripts/teacher/courseList.js"></script>
-      <!--
-      <script>
-          var courselist = new Vue({
-              el:'#Courses',
-              methods:{
-                quitLogin: function() {
-                      console.log('cookie',document.cookie);
-                      axios.delete('/api/users/session')
-                      .then(function (response) {
-                          console.log(response.status);
-                          window.location="/";
-                      })
-                      .catch(function (error) {
-                          alert(response.data);
-                      });
-                  },
-                  changPassword:function() {
-                      console.log('changPassword');
-                      window.location="/user/change_password";
-                  },
-                  jump:function (course_id){
-                      console.log('jump');
-                      window.location='/course/'+course_id; 
-                      //return course_id;
-                      //alert('hello,newpage!'); 
-                  }
-              },
-              created(){
-                alert('mdzz');
-              }
-          
-          });
-        </script>-->
  
 </body>
 </html>
