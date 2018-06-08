@@ -37,8 +37,8 @@ var changePasswordform = new Vue({
                 changePasswordform.em3 = '两次密码不一样！';
             }
 
-            alert('checkinput');
-            alert('p',p);
+           // alert('checkinput');
+           // alert('p',p);
             if (p>0) {
                 return false;
             };
@@ -77,8 +77,9 @@ var changePasswordform = new Vue({
         }
     }
 });
+//如果这个界面用后端渲染，就需要下面那样对按钮添加事件
 
-function checkInput_jq() {
+/*function checkInput_jq() {
     console.log('patch');
     axios.patch('/api/user/password', {
         'old_password': changePasswordform.oldpw,
@@ -105,4 +106,4 @@ function addEvents() {
     $("#ensurePost").click(checkInput_jq);
 }
 
-$(document).ready(addEvents);
+$(document).ready(addEvents);*/

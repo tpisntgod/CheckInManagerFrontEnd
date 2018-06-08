@@ -4,20 +4,6 @@ var courselist = new Vue({
     data: {
         courses: ''
     },
-        /*{
-        courses:[
-            {
-                course_id:'1', 
-                course_name:'数据挖掘',
-                semester:'2017-2018学年度第二学期'
-            },
-            {
-                course_id:'2', 
-                course_name:'系统分析与设计',
-                semester:'2017-2018学年度第一学期'
-            }
-        ]
-    },*/
     methods:{
     	quitLogin: function() {
             console.log('cookie',document.cookie);

@@ -1,7 +1,7 @@
 var coursedetail = new Vue({
     el:'#CourseDetail',
     data:{
-        course_name: '数据挖掘',
+        course_name: '',
         course_id: '1',
         credit: 2,
         semester: '2017-2018学年度第一学期',
@@ -39,9 +39,52 @@ var coursedetail = new Vue({
 
     },
     created(){
-
-    }
-
-    
-    
+    } 
 });
+
+//上面的Vue实例，目前没有作用
+//改用下面的JQuery对象
+
+
+var course_id = $("#courseId").text();//想方设法获得课程id,这个参数要一直传到后面的页面
+/*
+$.ajax({
+   url: "data.json",//json文件位置
+   type: "GET",//请求方式为get
+   dataType: "json", //数据格式为json
+   success: function(data) {//请求成功完成后要执行
+       var str = '<p>course_id:' + data.course_id + 'teacher_name：' + data.name + '</p>';
+       document.write(str);
+   }
+});
+*/
+
+
+function addEvents() {
+    $("#mainPage").click(function() {
+        //   window.location='/course/'+$(this).children().text(); 
+        //还是返回本界面
+        //alert(a);
+    });
+    $("#studentName").click(function() {
+       window.location =  '/course/'+course_id+'/course_member'; 
+    });
+    $("#signHistory").click(function() {
+      window.location =  '/course/'+course_id+'/checkin_student';
+    });
+    $("#Sign").click(function() {
+        //签到界面
+        //todo
+    });
+    $("#courseList").click(function() {
+        window.location = "/course";
+    });
+    $("#changePass").click(function() {
+        window.location =  '/user/change_password';
+    });
+    $("#logout").click(function() {
+        window.location =  '/user/login';
+    });
+}
+
+$(document).ready(addEvents);

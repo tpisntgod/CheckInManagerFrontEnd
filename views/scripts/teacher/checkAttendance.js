@@ -1,21 +1,13 @@
-var studentName = new Vue({
-    el:'#studentName',
+var checkinHistory = new Vue({
+    el:'#checkinHistory',
     data:{
-         course_member:[
-            {
-                student_id:'15331117',
-                student_name:'王小明'
-            },
-            {
-                student_id:'11171533',
-                student_name:'高恩星'
-            }
-        ],
-        course_member_num:2
+         checkin_history:[
+            
+        ]
     },
     methods:{
         to_mainPage:function(course_id) {
-           window.location='/course/'+course_id; 
+            window.location='/course/'+course_id; 
         },
         to_studentList:function(course_id){
             window.location =  '/course/'+course_id+'/course_member';
@@ -32,6 +24,9 @@ var studentName = new Vue({
              window.location = '/course';
 
         },
+        to_singleAttendancePage:function(course_id,checkin_id){
+            window.location = '/course/'+ course_id + '/checkin_student/' + checkin_id;
+        },
         setting:function(){
             window.location =  '/user/change_password';
         },
@@ -44,22 +39,26 @@ var studentName = new Vue({
     created(){
 
     }
+
 });
 
 //下面是jquery方法的实现
 
-//注意：这个界面是需要上一个课程详情界面的course_id，无论是回传还是后面界面都要继续用，还没解决
+//注意：这个界面是需要课程详情界面的course_id，无论是回传还是后面界面都要继续用，还没解决
 var course_id  ;
+
+
+
 
 function addEvents() {
     $("#mainPage").click(function() {
         window.location='/course/'+course_id;  //要回到课程详情界面就要course_id
     });
     $("#studentName").click(function() {
-      //不用操作 
+        window.location =  '/course/'+course_id+'/course_member';//也要course_id
     });
     $("#signHistory").click(function() {
-        window.location =  '/course/'+course_id+'/checkin_student'; //也要course_id
+        //不用操作 
     });
     $("#Sign").click(function() {
         //签到界面
@@ -75,6 +74,12 @@ function addEvents() {
     $("#logout").click(function() {
         window.location =  '/user/login';
     });
+
+    //点击进入详情签到界面
+    $(".checkSingle").click(function() {
+        window.location =  '/course/'+ course_id +'/checkin_student/' + $(this).children().text();
+    });
+
 }
 
 $(document).ready(addEvents);
