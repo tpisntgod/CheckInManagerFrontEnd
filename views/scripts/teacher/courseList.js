@@ -1,5 +1,5 @@
 // 这个Vue实例，没有作用
-var courselist = new Vue({
+/*var courselist = new Vue({
     el:'#Courses',
     data: {
         courses: ''
@@ -30,13 +30,25 @@ var courselist = new Vue({
     created(){
 
     }
-});
+});*/
 //上面的Vue实例，目前没有作用
+
+
+$("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
 
 function addEvents() {
     $(".name").click(function() {
         window.location='/course/'+$(this).children().text(); 
     });
+    //修改密码
+    $("#changePass").click(function() {
+        window.location =  '/user/change_password';
+    });
+    //退出登录
+    $("#logout").click(function() {
+        window.location =  '/user/login';
+    });
+ 
 }
 
 $(document).ready(addEvents);

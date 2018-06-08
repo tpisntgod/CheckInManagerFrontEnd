@@ -1,4 +1,4 @@
-var coursedetail = new Vue({
+/*var coursedetail = new Vue({
     el:'#CourseDetail',
     data:{
         course_name: '',
@@ -40,24 +40,18 @@ var coursedetail = new Vue({
     },
     created(){
     } 
-});
+});*/
 
 //上面的Vue实例，目前没有作用
 //改用下面的JQuery对象
 
 
-var course_id = $("#courseId").text();//想方设法获得课程id,这个参数要一直传到后面的页面
-/*
-$.ajax({
-   url: "data.json",//json文件位置
-   type: "GET",//请求方式为get
-   dataType: "json", //数据格式为json
-   success: function(data) {//请求成功完成后要执行
-       var str = '<p>course_id:' + data.course_id + 'teacher_name：' + data.name + '</p>';
-       document.write(str);
-   }
-});
-*/
+var course_id = $("#courseId").text();
+
+localStorage.setItem("course_id",course_id);//这个界面获得course id，写进浏览器内存
+
+console.log($("#courseId").text());//这个界面，测试服务器返回的课程id假定是1，
+
 
 
 function addEvents() {

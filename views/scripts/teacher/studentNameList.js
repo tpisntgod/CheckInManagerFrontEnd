@@ -1,4 +1,4 @@
-var studentName = new Vue({
+/*var studentName = new Vue({
     el:'#studentName',
     data:{
          course_member:[
@@ -44,12 +44,15 @@ var studentName = new Vue({
     created(){
 
     }
-});
+});*/
+
 
 //下面是jquery方法的实现
 
-//注意：这个界面是需要上一个课程详情界面的course_id，无论是回传还是后面界面都要继续用，还没解决
-var course_id  ;
+var course_id = localStorage.getItem("course_id");
+
+$("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
+
 
 function addEvents() {
     $("#mainPage").click(function() {

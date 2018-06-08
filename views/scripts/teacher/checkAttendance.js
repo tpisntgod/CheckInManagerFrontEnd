@@ -1,4 +1,4 @@
-var checkinHistory = new Vue({
+/*var checkinHistory = new Vue({
     el:'#checkinHistory',
     data:{
          checkin_history:[
@@ -40,14 +40,14 @@ var checkinHistory = new Vue({
 
     }
 
-});
+});*/
 
 //下面是jquery方法的实现
 
 //注意：这个界面是需要课程详情界面的course_id，无论是回传还是后面界面都要继续用，还没解决
-var course_id  ;
+var course_id = localStorage.getItem("course_id");
 
-
+$("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
 
 
 function addEvents() {

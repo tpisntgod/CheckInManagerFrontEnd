@@ -96,6 +96,13 @@ router.post('/api/users/session',  async (ctx, next) => {
     /*ctx.response.type = 'json';
     ctx.response.body = {message: 'empty username or password'};*/
     ctx.response.status = 201;
+    ctx.response.type = 'json';
+    ctx.response.body = JSON.stringify({
+        username:'张老师'
+    });
+    
+
+
 });
 
 router.delete('/api/users/session', async (ctx, next) => {
@@ -224,7 +231,7 @@ router.get('/course/:course_id', async (ctx, next) => {
             class_time: '周二1-4节课', 
             position: '公教楼b栋', 
             student_num: 100,
-            username:'pml'
+            username:'张老师'
         },
         template: fs.readFileSync('./views/html/teacher/courseDetail_markup.html', 'utf-8')
     })
