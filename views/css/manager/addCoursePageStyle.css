@@ -1,3 +1,4 @@
+
 @font-face{
   
 }
@@ -115,7 +116,7 @@ html, body{
 }
 
 #teacherHeadList{
-  margin-left: 70%;
+  margin-left: 65%;
 }
 
 #teacherHead{
@@ -129,7 +130,7 @@ html, body{
 
 #bodyBlock{
   width: 85%;
-  height: 440px;
+  height: 460px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
@@ -158,19 +159,30 @@ html, body{
 }
 
 #modifyDiv{
-  width: 25%;
+  width: 400px;
   margin-left: auto;
   margin-right: auto;
-  padding: 2%;
+  padding: 10px;
 }
 
 #modifyDiv p{
   display: inline-block;
   margin-bottom: 10px;
-  width: 150px;
   text-align: justify;
   text-align-last:justify;
   text-indent: 10px;
+
+}
+#left,#right{
+  width: 250px;
+  display: inline;
+  margin-left: 50px;
+  float: left;
+}
+
+#button{
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
@@ -183,6 +195,7 @@ html, body{
   cursor: pointer;
   border-color: #059900;
   outline-color: #059900;
+  display: inline;
 }
 
 #NameInput{
@@ -195,7 +208,9 @@ html, body{
   height: 40px;
 }
 
-
+input{
+  margin-bottom: 5px;
+}
 #errorMessage1, #errorMessage2, #errorMessage3{
   
   color: #b3b3b4;
@@ -204,5 +219,4 @@ html, body{
   margin-left: 60px;
   font-size: 14px;
 }
-
 
