@@ -863,19 +863,61 @@ router.get('/', async (ctx, next) => {
 });
 
 
-router.get('/user/add_user', async (ctx, next) => {
+//管理员：添加全级学生页面
+router.get('/user/add_student', async (ctx, next) => {
     console.log('login manager addStudent router');
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/manager/addAllStudentPage.html');
+});
+
+router.post('/api/student',  async (ctx, next) => {
+    console.log('add student check');
+    ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
+    ctx.response.status = 201;
+});
+
+//管理员：添加课程
+router.get('/user/:user_id/add_course', async (ctx, next) => {
+    console.log('login manager addCourse router');
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/manager/addCoursePage.html');
+});
+
+router.post('/api/course',  async (ctx, next) => {
+    console.log('add course check');
+    ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
+    ctx.response.status = 201;
+});
+
+
+
+//管理员：添加学生页面
+router.get('/user/:user_id/course/:course_id/add_course_member', async (ctx, next) => {
+    console.log('login manager add Student in the course router');
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./views/html/manager/addStudentPage.html');
 });
 
 
-
-router.post('/api/user',  async (ctx, next) => {
+router.post('/api/course/:course_id/course_member',  async (ctx, next) => {
     console.log('add student check');
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
     ctx.response.status = 201;
 });
+
+//管理员：添加老师页面
+router.get('/user/add_user', async (ctx, next) => {
+    console.log('login manager add Teacher router');
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/manager/addTeacherPage.html');
+});
+
+router.post('/api/user',  async (ctx, next) => {
+    console.log('add teacher check');
+    ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
+    ctx.response.status = 201;
+});
+
 
 
 // add router middleware:

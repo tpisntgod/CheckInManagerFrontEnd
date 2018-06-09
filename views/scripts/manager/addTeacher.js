@@ -1,5 +1,5 @@
-var addstudentform = new Vue({
-    el: '#addStudent',
+var addTeacherform = new Vue({
+    el: '#addTeacher',
     data: {
         em1: '',
         em2: '',
@@ -12,21 +12,21 @@ var addstudentform = new Vue({
             //p>0时为出错
             //前端需要检查做输入是否为空
             var p = 0;
-            if (addstudentform.username === '') {
+            if (addTeacherform.username === '') {
                 p++;
-                addstudentform.em1 = '姓名不能为空';
+                addTeacherform.em1 = '姓名不能为空';
             } else {
-                addstudentform.em1 = '';
+                addTeacherform.em1 = '';
             };
-            if (addstudentform.user_id === '') {
+            if (addTeacherform.user_id === '') {
                 p++;
-                addstudentform.em2 = '学号不能为空';
+                addTeacherform.em2 = '工号不能为空';
             } else {
-                addstudentform.em2 = '';
+                addTeacherform.em2 = '';
             };
-            if (!!addstudentform.user_id && /^[\d]{8}$/.test(addstudentform.user_id) === false) {
+            if (!!addTeacherform.user_id && /^[\d]{8}$/.test(addTeacherform.user_id) === false) {
                 p++;
-                addstudentform.em2 = '学号格式错误,正确格式:8位数字';
+                addTeacherform.em2 = '工号格式错误,正确格式:8位数字';
             };
             if (p>0) {
                 return false;
@@ -34,8 +34,8 @@ var addstudentform = new Vue({
 
             console.log('post');
             axios.post('/api/user', {
-                'username': addstudentform.username,
-                'user_id': addstudentform.user_id
+                'username': addTeacherform.username,
+                'user_id': addTeacherform.user_id
             })
             .then(function (response) {
                 console.log(response.status);
@@ -50,12 +50,10 @@ var addstudentform = new Vue({
             });
         },
         back:function () {
-            var user_id = localStorage.getItem("user_id");
-            var course_id = localStorage.getItem("course_id");
-            window.location= '/user/' + user_id + '/course/' + course_id + '/course_member';
+             window.location="/user";
         },
         to_addStudentPage:function(course_id){
-            window.location = '/user/add_student'; 
+            window.location =  '/user/add_student'; 
         },
 
         quitLogin: function() {
