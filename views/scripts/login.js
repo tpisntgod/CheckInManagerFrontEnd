@@ -4,7 +4,8 @@ var loginform = new Vue({
         em1: '',
         em2: '',
         name: '',
-        pw: ''
+        pw: '',
+        username:''
     },
     methods: {
         checkInput: function() {
@@ -26,24 +27,40 @@ var loginform = new Vue({
             if (p>0) {
                 return false;
             };
-            console.log('post');
+            console.log('post'); 
+            let that = this;
+        
             axios.post('/api/users/session', {
                 'user_id': loginform.name,
                 'password': loginform.pw
             })
             .then(function (response) {
-                console.log(response.status);
+                console.log(response);
+
                 if (response.status == 201) {
-                    window.location="/course";
+                    that.username = response.data.username; //然后要将这个名字保存下来以后用
+                    console.log(that.username);
+                    var global_name = that.username;
+                    localStorage.setItem("username",global_name);
+                    console.log(localStorage.getItem("username"));
+
+                    //怎么判断登录用户是管理员还是教师？再选择要跳转界面
+
+                    //window.location="/course"; //定义到教师界面的url
+
+                    window.location="/user"; //定向到管理员界面的url
+
+
                 }
             })
             .catch(function (error) {
                 //alert(error.status);
-                console.log(error.response.status);
+                console.log(error.response);
             });
         }
     },
     created(){
-      alert('mdzz');
+      //alert('mdzz');
     }
 });
+

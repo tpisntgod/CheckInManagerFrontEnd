@@ -27,10 +27,12 @@
         <p id="errorMessage2">{{ em2 }}</p>
         <!-- <input type="submit" id="submitBT" value="登录">-->
         <button v-on:click="checkInput" id="submitBT">登录</button>
+        <p id="T_NAME" hidden="hidden">{{username}}</p>
     </div>
 
   </div>
 
+  <script src="/scripts/jquery-3.3.1.js"></script>
   <script src="/scripts/vue.js"></script>
   <script src="/scripts/axios.min.js"></script>
   <script src="/scripts/login.js"></script>

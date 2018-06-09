@@ -9,7 +9,7 @@ html, body{
   margin: 0;
   padding: 0;
   overflow: hidden;
-  min-width:1200px; 
+  min-width:1280px; 
 
   font-family: "Microsoft YaHei", "Century Gothic", cursive;
   color: grey;
@@ -94,7 +94,7 @@ html, body{
 }
 
 #welcomeInfo{  
-  width: 100px;
+  width: 120px;
   height: 20px;
   display: inline-block;
   float: right;
@@ -121,7 +121,7 @@ html, body{
 
 #bodyBlock{
   width: 85%;
-  height: 68%;
+  height: 440px;
   overflow-y: scroll;
   margin-left: auto;
   margin-right: auto;
