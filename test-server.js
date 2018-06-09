@@ -889,15 +889,12 @@ router.post('/api/course',  async (ctx, next) => {
     ctx.response.status = 201;
 });
 
-
-
 //管理员：添加学生页面
 router.get('/user/:user_id/course/:course_id/add_course_member', async (ctx, next) => {
     console.log('login manager add Student in the course router');
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./views/html/manager/addStudentPage.html');
 });
-
 
 router.post('/api/course/:course_id/course_member',  async (ctx, next) => {
     console.log('add student check');
@@ -912,13 +909,12 @@ router.get('/user/add_user', async (ctx, next) => {
     ctx.response.body = fs.createReadStream('./views/html/manager/addTeacherPage.html');
 });
 
+// 添加老师POST请求
 router.post('/api/user',  async (ctx, next) => {
     console.log('add teacher check');
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
     ctx.response.status = 201;
 });
-
-
 
 // add router middleware:
 app.use(router.routes());

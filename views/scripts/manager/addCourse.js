@@ -1,3 +1,6 @@
+//需要user_id传递给后面
+var user_id = localStorage.getItem("user_id");
+
 var addcourseform = new Vue({
     el: '#addCourse',
     data: {
@@ -53,20 +56,25 @@ var addcourseform = new Vue({
             };
 
             console.log('post');
-            axios.post('/api/user', {
+            //alert('addcourseform.username',addcourseform.username);
+            //alert('addcourseform.userid',addcourseform.user_id);
+            console.log(addcourseform.user_id);
+            alert(addcourseform.username);
+            alert(addcourseform.user_id);
+            alert(user_id);
+            axios.post('/api/course', {
                 'username': addcourseform.username,
-                'user_id': addcourseform.user_id
+                'user_id': user_id
             })
             .then(function (response) {
                 console.log(response.status);
                 if (response.status == 201) {
-                    //window.location="/user/login";
-                    alert('添加成功');
+                    window.location = '/user/' + user_id + '/course';
                 }
             })
             .catch(function (error) {
-                //alert(error.status);
-                console.log(error.response.status);
+                alert(error.status);
+                //console.log(error.response.status);
             });
         },
         back:function (user_id) {

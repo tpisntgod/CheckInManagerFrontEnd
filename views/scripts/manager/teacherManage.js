@@ -26,6 +26,11 @@ function addEvents() {
         window.location = '/user/login';
         //alert('a');
     });
+
+    //手动添加教师
+    $("#addTeacher").click(function() {
+        window.location = '/user/add_user';
+    });
 }
 
 $(document).ready(addEvents);

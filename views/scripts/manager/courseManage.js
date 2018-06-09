@@ -27,6 +27,11 @@ function addEvents() {
         window.location = '/user/login';
         //alert('a');
     });
+
+    //手动添加课程
+    $("#addCourse").click(function() {
+        window.location = '/user/'+user_id+'/add_course';
+    });
 }
 
 $(document).ready(addEvents);
