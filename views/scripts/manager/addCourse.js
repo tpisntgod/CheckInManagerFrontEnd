@@ -1,10 +1,16 @@
-var addstudentform = new Vue({
-    el: '#addStudent',
+var addcourseform = new Vue({
+    el: '#addCourse',
     data: {
         em1: '',
         em2: '',
-        username: '',
-        user_id: ''
+        em3: '',
+        em4: '',
+        em5: '',
+        course_name: '',
+        course_credit: '',
+        course_semester: '',
+        course_time: '',
+        course_location: ''
     },
     methods: {
         checkInput: function() {
@@ -12,21 +18,35 @@ var addstudentform = new Vue({
             //p>0时为出错
             //前端需要检查做输入是否为空
             var p = 0;
-            if (addstudentform.username === '') {
+            if (addcourseform.course_name === '') {
                 p++;
-                addstudentform.em1 = '姓名不能为空';
+                addcourseform.em1 = '课程名称不能为空';
             } else {
-                addstudentform.em1 = '';
+                addcourseform.em1 = '';
             };
-            if (addstudentform.user_id === '') {
+            if (addcourseform.course_credit === '') {
                 p++;
-                addstudentform.em2 = '学号不能为空';
+                addcourseform.em2 = '总学分不能为空';
             } else {
-                addstudentform.em2 = '';
+                addcourseform.em2 = '';
             };
-            if (!!addstudentform.user_id && /^[\d]{8}$/.test(addstudentform.user_id) === false) {
+            if (addcourseform.course_semester === '') {
                 p++;
-                addstudentform.em2 = '学号格式错误,正确格式:8位数字';
+                addcourseform.em3 = '学期不能为空';
+            } else {
+                addcourseform.em3 = '';
+            };
+            if (addcourseform.course_time === '') {
+                p++;
+                addcourseform.em4 = '上课时间不能为空';
+            } else {
+                addcourseform.em4 = '';
+            };
+            if (addcourseform.course_location === '') {
+                p++;
+                addcourseform.em5 = '上课地点不能为空';
+            } else {
+                addcourseform.em5 = '';
             };
             if (p>0) {
                 return false;
@@ -34,8 +54,8 @@ var addstudentform = new Vue({
 
             console.log('post');
             axios.post('/api/user', {
-                'username': addstudentform.username,
-                'user_id': addstudentform.user_id
+                'username': addcourseform.username,
+                'user_id': addcourseform.user_id
             })
             .then(function (response) {
                 console.log(response.status);
@@ -49,11 +69,11 @@ var addstudentform = new Vue({
                 console.log(error.response.status);
             });
         },
-        back:function (user_id , course_id) {
-             window.location= '/user/' + user_id + '/course/' + course_id + '/course_member';
+        back:function (user_id) {
+             window.location='/user/' + user_id + '/course';
         },
         to_addStudentPage:function(course_id){
-            window.location = '/user/add_student'; 
+            window.location ='/user/add_student'; 
         },
 
         quitLogin: function() {

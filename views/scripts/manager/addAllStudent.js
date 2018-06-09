@@ -49,11 +49,11 @@ var addstudentform = new Vue({
                 console.log(error.response.status);
             });
         },
-        back:function (user_id , course_id) {
-             window.location= '/user/' + user_id + '/course/' + course_id + '/course_member';
+        back:function () {
+             window.location="/user";
         },
         to_addStudentPage:function(course_id){
-            window.location = '/user/add_student'; 
+            window.location =  '/user/add_student'; 
         },
 
         quitLogin: function() {
