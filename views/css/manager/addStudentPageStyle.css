@@ -115,7 +115,7 @@ html, body{
 }
 
 #teacherHeadList{
-  margin-left: 70%;
+  margin-left: 65%;
 }
 
 #teacherHead{
@@ -167,7 +167,7 @@ html, body{
 #modifyDiv p{
   display: inline-block;
   margin-bottom: 10px;
-  width: 150px;
+
   text-align: justify;
   text-align-last:justify;
   text-indent: 10px;
