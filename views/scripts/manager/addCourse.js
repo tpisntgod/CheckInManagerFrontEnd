@@ -56,15 +56,15 @@ var addcourseform = new Vue({
             };
 
             console.log('post');
-            //alert('addcourseform.username',addcourseform.username);
-            //alert('addcourseform.userid',addcourseform.user_id);
             console.log(addcourseform.user_id);
-            alert(addcourseform.username);
-            alert(addcourseform.user_id);
             alert(user_id);
             axios.post('/api/course', {
-                'username': addcourseform.username,
-                'user_id': user_id
+                course_name: addcourseform.course_name,
+                credit: addcourseform.course_credit,
+                semester: addcourseform.course_semester,
+                class_time: addcourseform.course_time,
+                position: addcourseform.course_location,
+                user_id: user_id
             })
             .then(function (response) {
                 console.log(response.status);

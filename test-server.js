@@ -257,8 +257,7 @@ router.get('/course', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('courseList html');
-        console.log(html);
-
+        //console.log(html);
     })
     
 });
@@ -296,7 +295,7 @@ router.get('/course/:course_id', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('courseDetail html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -389,7 +388,7 @@ router.get('/course/:course_id/course_member', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('students name  html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -500,7 +499,7 @@ router.get('/course/:course_id/checkin_student', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('sign history html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -603,7 +602,7 @@ router.get('/course/:course_id/checkin_student/:checkin_id', async (ctx, next) =
         }
         ctx.response.body = html;
         console.log('single attendance html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -692,7 +691,7 @@ router.get('/user', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('teacher manage html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -776,7 +775,7 @@ router.get('/user/:user_id/course', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('course manage html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -849,7 +848,7 @@ router.get('/user/:user_id/course/:course_id/course_member', async (ctx, next) =
         }
         ctx.response.body = html;
         console.log('student manage html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -885,6 +884,8 @@ router.get('/user/:user_id/add_course', async (ctx, next) => {
 
 router.post('/api/course',  async (ctx, next) => {
     console.log('add course check');
+    console.log(' course_name:',ctx.request.body.course_name, 'semester',
+    ctx.request.body.semester, 'user id:',ctx.request.body.user_id,);
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
     ctx.response.status = 201;
 });
