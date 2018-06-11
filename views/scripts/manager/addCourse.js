@@ -1,5 +1,9 @@
 //需要user_id传递给后面
 var user_id = localStorage.getItem("user_id");
+// 欢迎信息显示
+$(document).ready(function() {
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！');
+});
 
 var addcourseform = new Vue({
     el: '#addCourse',
@@ -57,7 +61,7 @@ var addcourseform = new Vue({
 
             console.log('post');
             console.log(addcourseform.user_id);
-            alert(user_id);
+            //alert(user_id);
             axios.post('/api/course', {
                 course_name: addcourseform.course_name,
                 credit: addcourseform.course_credit,

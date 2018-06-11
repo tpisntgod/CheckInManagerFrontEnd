@@ -38,8 +38,10 @@ var loginform = new Vue({
                 console.log(response);
 
                 if (response.status == 201) {
+                    console.log(response.data);
                     that.username = response.data.username; //然后要将这个名字保存下来以后用
                     console.log(that.username);
+                    //alert(that.username);
                     var global_name = that.username;
                     localStorage.setItem("username",global_name);
                     console.log(localStorage.getItem("username"));

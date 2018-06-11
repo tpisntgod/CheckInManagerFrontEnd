@@ -99,7 +99,8 @@ router.post('/api/users/session',  async (ctx, next) => {
     ctx.response.status = 201;
     ctx.response.type = 'json';
     ctx.response.body = JSON.stringify({
-        username:'张老师'
+        //username:'张老师'
+        username:'张管理员'
     });
     
 
@@ -890,6 +891,12 @@ router.post('/api/course',  async (ctx, next) => {
     ctx.response.status = 201;
 });
 
+router.delete('/api/course/:course_id', async (ctx, next) => {
+    console.log('delete course');
+    console.log('course_id',ctx.params.course_id);
+    ctx.response.status = 201;
+});
+
 //管理员：添加学生页面
 router.get('/user/:user_id/course/:course_id/add_course_member', async (ctx, next) => {
     console.log('login manager add Student in the course router');
@@ -921,7 +928,14 @@ router.get('/user/add_user', async (ctx, next) => {
 // 添加老师POST请求
 router.post('/api/user',  async (ctx, next) => {
     console.log('add teacher check');
+    console.log(' username:',ctx.request.body.username, 'user_id', ctx.request.body.user_id);
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
+    ctx.response.status = 201;
+});
+
+// 删除某个教师数据
+router.delete('/api/user/:user_id', async (ctx, next) => {
+    console.log('teacher_id:',ctx.params.user_id);
     ctx.response.status = 201;
 });
 

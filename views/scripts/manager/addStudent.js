@@ -2,6 +2,12 @@
 var user_id = localStorage.getItem("user_id");
 //需要course_id
 var course_id = localStorage.getItem("course_id");
+// 欢迎信息显示
+//$("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！');
+// 欢迎信息显示
+$(document).ready(function() {
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！');
+});
 
 var addstudentform = new Vue({
     el: '#addStudent',

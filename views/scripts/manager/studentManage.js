@@ -9,14 +9,19 @@ var studentManage = new Vue({
 });
 //上面的vue用于前端测试
 
-//需要当前教师名字
-
 //需要user_id
 var user_id = localStorage.getItem("user_id");
 //需要course_id
 var course_id = localStorage.getItem("course_id");
 
 function addEvents() {
+    // 欢迎信息显示
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
+
+    //退出登录
+    $("#logout").click(function() {
+        window.location = '/user/login';
+    });
     //管理员手动添加课程学生的页面
     $("#addCourseStudent").click(function() {
         window.location = '/user/'+user_id+'/course/'+course_id+'/add_course_member';
@@ -33,7 +38,7 @@ function addEvents() {
         axios.delete(delete_url)
         .then(function(response) {
             console.log(response.status);
-            alert('删除学生成功');
+            alert('删除学生数据成功');
         })
         .catch(function(error) {
             console.log(error.response);
