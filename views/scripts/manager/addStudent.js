@@ -55,6 +55,7 @@ var addstudentform = new Vue({
                 console.log(response.status);
                 if (response.status == 201) {
                     window.location='/user/'+user_id+'/course/'+course_id+'/course_member';
+
                 }
             })
             .catch(function (error) {
