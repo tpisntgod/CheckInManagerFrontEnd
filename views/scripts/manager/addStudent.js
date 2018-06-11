@@ -1,3 +1,8 @@
+//需要user_id传递给后面
+var user_id = localStorage.getItem("user_id");
+//需要course_id
+var course_id = localStorage.getItem("course_id");
+
 var addstudentform = new Vue({
     el: '#addStudent',
     data: {
@@ -29,19 +34,21 @@ var addstudentform = new Vue({
                 addstudentform.em2 = '学号格式错误,正确格式:8位数字';
             };
             if (p>0) {
+                alert('false');
                 return false;
             };
 
             console.log('post');
-            axios.post('/api/user', {
-                'username': addstudentform.username,
-                'user_id': addstudentform.user_id
+            //add_course_student_url = '/api/course/'+course_id+'/course_member';
+            console.log('name,id:',addstudentform.username,addstudentform.user_id);
+            axios.post('/api/course/'+course_id+'/course_member', {
+                student_id : addstudentform.user_id,
+                student_name : addstudentform.username
             })
             .then(function (response) {
                 console.log(response.status);
                 if (response.status == 201) {
-                    //window.location="/user/login";
-                    alert('添加成功');
+                    window.location='/user/'+user_id+'/course/'+course_id+'/course_member';
                 }
             })
             .catch(function (error) {
@@ -55,7 +62,7 @@ var addstudentform = new Vue({
             window.location= '/user/' + user_id + '/course/' + course_id + '/course_member';
         },
         to_addStudentPage:function(course_id){
-            window.location = '/user/add_student'; 
+            window.location = '/add_student'; 
         },
 
         quitLogin: function() {

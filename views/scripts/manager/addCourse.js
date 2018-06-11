@@ -77,11 +77,13 @@ var addcourseform = new Vue({
                 //console.log(error.response.status);
             });
         },
-        back:function (user_id) {
-             window.location='/user/' + user_id + '/course';
+        back:function () {
+            console.log(user_id);
+            //alert(user_id);
+            window.location='/user/' + user_id + '/course';
         },
-        to_addStudentPage:function(course_id){
-            window.location ='/user/add_student'; 
+        to_addStudentPage:function(){
+            window.location ='/add_student';
         },
 
         quitLogin: function() {

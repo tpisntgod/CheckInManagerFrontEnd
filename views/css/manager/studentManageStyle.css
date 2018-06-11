@@ -121,10 +121,9 @@ html, body{
   display: block;
 }
 
-
-#addPic{
+#addCourseStudent{
   float: right;
-  margin-right: 5%;
+  margin-right: 25%;
 }
 #deleteAllPic{
     float: right;

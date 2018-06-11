@@ -32,6 +32,11 @@ function addEvents() {
     $("#addCourse").click(function() {
         window.location = '/user/'+user_id+'/add_course';
     });
+    
+    // 添加全级学生
+    $("#addAllStudentButton").click(function() {
+        window.location = '/add_student';
+    });
 }
 
 $(document).ready(addEvents);

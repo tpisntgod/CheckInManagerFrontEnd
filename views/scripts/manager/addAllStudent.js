@@ -4,7 +4,8 @@ var addstudentform = new Vue({
         em1: '',
         em2: '',
         username: '',
-        user_id: ''
+        user_id: '',
+        teacher_name: ''
     },
     methods: {
         checkInput: function() {
@@ -32,16 +33,15 @@ var addstudentform = new Vue({
                 return false;
             };
 
-            console.log('post');
-            axios.post('/api/user', {
-                'username': addstudentform.username,
-                'user_id': addstudentform.user_id
+            console.log('add all students');
+            axios.post('/api/student', {
+                student_name : addstudentform.username,
+                student_id : addstudentform.user_id
             })
             .then(function (response) {
                 console.log(response.status);
                 if (response.status == 201) {
-                    //window.location="/user/login";
-                    alert('添加成功');
+                    window.location='/user';
                 }
             })
             .catch(function (error) {
@@ -53,7 +53,7 @@ var addstudentform = new Vue({
              window.location="/user";
         },
         to_addStudentPage:function(course_id){
-            window.location =  '/user/add_student'; 
+            window.location =  '/add_student'; 
         },
 
         quitLogin: function() {
@@ -69,5 +69,8 @@ var addstudentform = new Vue({
                 alert(error);
             });
         }
+    },
+    created() {
+        //teacher_name = 
     }
 });
