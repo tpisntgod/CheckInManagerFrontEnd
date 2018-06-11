@@ -40,8 +40,10 @@ var addstudentform = new Vue({
             .then(function (response) {
                 console.log(response.status);
                 if (response.status == 201) {
-                    //window.location="/user/login";
-                    alert('添加成功');
+                    var user_id = localStorage.getItem("user_id");
+                    var course_id = localStorage.getItem("course_id");
+                    window.location= '/user/' + user_id + '/course/' + course_id + '/course_member';
+                    
                 }
             })
             .catch(function (error) {

@@ -40,8 +40,8 @@ var addstudentform = new Vue({
             .then(function (response) {
                 console.log(response.status);
                 if (response.status == 201) {
-                    //window.location="/user/login";
-                    alert('添加成功');
+                    window.location="/user";
+                    
                 }
             })
             .catch(function (error) {
