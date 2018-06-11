@@ -3,7 +3,7 @@
     <img id="bookIMG" src="/pic/book.png">
     <p id="heading">管理员系统</p>
     <ul >
-      <li id="addAllStudents"><a href="javascript:void(0)">添加全级学生</a></li>
+      <li id="addAllStudents"><a href="javascript:void(0)" id="addAllStudentButton">添加全级学生</a></li>
       <li id="teacherHeadList">
         <img src="/pic/manager/defaultHead.png" id="teacherHead" />
         <ul id="teacherHeadUL">
@@ -34,7 +34,7 @@
             <td>{{teacher.username}}
 
             </td>
-            <td><img src="/pic/manager/delete.png"></td>
+            <td><img class="delete_teacher" style="cursor:pointer" src="/pic/manager/delete.png"></td>
           </tr>
         </tbody>
       </table>

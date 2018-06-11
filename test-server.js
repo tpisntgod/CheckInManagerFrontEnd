@@ -99,7 +99,8 @@ router.post('/api/users/session',  async (ctx, next) => {
     ctx.response.status = 201;
     ctx.response.type = 'json';
     ctx.response.body = JSON.stringify({
-        username:'张老师'
+        //username:'张老师'
+        username:'张管理员'
     });
     
 
@@ -257,8 +258,7 @@ router.get('/course', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('courseList html');
-        console.log(html);
-
+        //console.log(html);
     })
     
 });
@@ -296,7 +296,7 @@ router.get('/course/:course_id', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('courseDetail html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -389,7 +389,7 @@ router.get('/course/:course_id/course_member', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('students name  html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -500,7 +500,7 @@ router.get('/course/:course_id/checkin_student', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('sign history html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -603,7 +603,7 @@ router.get('/course/:course_id/checkin_student/:checkin_id', async (ctx, next) =
         }
         ctx.response.body = html;
         console.log('single attendance html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -692,7 +692,7 @@ router.get('/user', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('teacher manage html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -776,7 +776,7 @@ router.get('/user/:user_id/course', async (ctx, next) => {
         }
         ctx.response.body = html;
         console.log('course manage html');
-        console.log(html);
+        //console.log(html);
 
     })
     
@@ -849,12 +849,11 @@ router.get('/user/:user_id/course/:course_id/course_member', async (ctx, next) =
         }
         ctx.response.body = html;
         console.log('student manage html');
-        console.log(html);
+        //console.log(html);
 
     })
     
 });
-
 
 router.get('/', async (ctx, next) => {
    // ctx.response.body = '<h1>Index</h1>';
@@ -862,16 +861,17 @@ router.get('/', async (ctx, next) => {
     ctx.response.body = fs.createReadStream('./views/html/initial.html');
 });
 
-
 //管理员：添加全级学生页面
-router.get('/user/add_student', async (ctx, next) => {
+router.get('/add_student', async (ctx, next) => {
     console.log('login manager addStudent router');
     ctx.response.type = 'html';
     ctx.response.body = fs.createReadStream('./views/html/manager/addAllStudentPage.html');
 });
 
+// 管理员手动添加全级学生 POST请求
 router.post('/api/student',  async (ctx, next) => {
     console.log('add student check');
+    console.log('student_name:',ctx.request.body.student_name,' student_id:',ctx.request.body.student_id);
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
     ctx.response.status = 201;
 });
@@ -885,7 +885,15 @@ router.get('/user/:user_id/add_course', async (ctx, next) => {
 
 router.post('/api/course',  async (ctx, next) => {
     console.log('add course check');
+    console.log(' course_name:',ctx.request.body.course_name, 'semester',
+    ctx.request.body.semester, 'user id:',ctx.request.body.user_id,);
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
+    ctx.response.status = 201;
+});
+
+router.delete('/api/course/:course_id', async (ctx, next) => {
+    console.log('delete course');
+    console.log('course_id',ctx.params.course_id);
     ctx.response.status = 201;
 });
 
@@ -896,9 +904,17 @@ router.get('/user/:user_id/course/:course_id/add_course_member', async (ctx, nex
     ctx.response.body = fs.createReadStream('./views/html/manager/addStudentPage.html');
 });
 
+//管理员手动添加课程学生 POST请求
 router.post('/api/course/:course_id/course_member',  async (ctx, next) => {
     console.log('add student check');
+    console.log(' student_id:',ctx.request.body.student_id, 'student_name', ctx.request.body.student_name);
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
+    ctx.response.status = 201;
+});
+
+//管理员进入某个课程后 删除某个学生数据
+router.delete('/api/course/:course_id/course_member/:student_id', async (ctx, next) => {
+    console.log('delete course student');
     ctx.response.status = 201;
 });
 
@@ -912,7 +928,14 @@ router.get('/user/add_user', async (ctx, next) => {
 // 添加老师POST请求
 router.post('/api/user',  async (ctx, next) => {
     console.log('add teacher check');
+    console.log(' username:',ctx.request.body.username, 'user_id', ctx.request.body.user_id);
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
+    ctx.response.status = 201;
+});
+
+// 删除某个教师数据
+router.delete('/api/user/:user_id', async (ctx, next) => {
+    console.log('teacher_id:',ctx.params.user_id);
     ctx.response.status = 201;
 });
 

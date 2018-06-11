@@ -70,3 +70,8 @@ var addTeacherform = new Vue({
         }
     }
 });
+
+// 欢迎信息显示
+$(document).ready(function() {
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！');
+});

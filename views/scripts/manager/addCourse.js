@@ -1,5 +1,9 @@
 //需要user_id传递给后面
 var user_id = localStorage.getItem("user_id");
+// 欢迎信息显示
+$(document).ready(function() {
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！');
+});
 
 var addcourseform = new Vue({
     el: '#addCourse',
@@ -56,11 +60,15 @@ var addcourseform = new Vue({
             };
 
             console.log('post');
- 
             console.log(addcourseform.user_id);
+            //alert(user_id);
             axios.post('/api/course', {
-                'username': addcourseform.username,
-                'user_id': user_id
+                course_name: addcourseform.course_name,
+                credit: addcourseform.course_credit,
+                semester: addcourseform.course_semester,
+                class_time: addcourseform.course_time,
+                position: addcourseform.course_location,
+                user_id: user_id
             })
             .then(function (response) {
                 console.log(response.status);
@@ -73,11 +81,13 @@ var addcourseform = new Vue({
                 //console.log(error.response.status);
             });
         },
-        back:function (user_id) {
-             window.location='/user/' + user_id + '/course';
+        back:function () {
+            console.log(user_id);
+            //alert(user_id);
+            window.location='/user/' + user_id + '/course';
         },
-        to_addStudentPage:function(course_id){
-            window.location ='/user/add_student'; 
+        to_addStudentPage:function(){
+            window.location ='/add_student';
         },
 
         quitLogin: function() {
