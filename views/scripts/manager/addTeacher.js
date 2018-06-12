@@ -67,7 +67,7 @@ var addTeacherform = new Vue({
             .catch(function (error) {
                 alert(error.response.data.message);
                 console.log(error);
-                alert('添加失败')；
+                alert('添加失败');
             });
         }
     }

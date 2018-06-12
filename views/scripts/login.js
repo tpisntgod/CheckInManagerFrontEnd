@@ -47,8 +47,8 @@ var loginform = new Vue({
                     console.log(localStorage.getItem("username"));
 
                     //怎么判断登录用户是管理员还是教师？再选择要跳转界面
-                    //window.location="/course"; //定义到教师界面的url
-                    window.location="/user"; //定向到管理员界面的url
+                    window.location="/course"; //定义到教师界面的url
+                    //window.location="/user"; //定向到管理员界面的url
                 }
             })
             .catch(function (error) {

@@ -44,8 +44,8 @@ var changePasswordform = new Vue({
             };
             console.log('patch');
             axios.patch('/api/user/password', {
-                'old_password': changePasswordform.oldpw,
-                'password': changePasswordform.newpw
+                old_password: changePasswordform.oldPW,
+                password: changePasswordform.newPW
             })
             .then(function (response) {
                 console.log(response.status);
@@ -77,13 +77,19 @@ var changePasswordform = new Vue({
         }
     }
 });
+
+// 欢迎信息显示
+$(function() {
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！');
+});
+
 //如果这个界面用后端渲染，就需要下面那样对按钮添加事件
 
 /*function checkInput_jq() {
     console.log('patch');
     axios.patch('/api/user/password', {
-        'old_password': changePasswordform.oldpw,
-        'password': changePasswordform.newpw
+        'old_password': changePasswordform.oldPW,
+        'password': changePasswordform.newPW
     })
     .then(function (response) {
         console.log(response.status);

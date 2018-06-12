@@ -51,6 +51,8 @@ router.get('/user/change_password', async (ctx, next) => {
 router.patch('/api/user/password', async (ctx, next) => {
     console.log('change password check...');
     //console.log(__dirname);
+    console.log(ctx.request.body);
+    console.log('old password:',ctx.request.body.old_password, 'new password', ctx.request.body.password);
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
     ctx.response.status = 201;
     console.log('ctx.request:',ctx.request);
@@ -108,8 +110,8 @@ router.post('/api/users/session',  async (ctx, next) => {
     ctx.response.status = 201;
     ctx.response.type = 'json';
     ctx.response.body = JSON.stringify({
-        //username:'张老师'
-        username:'张管理员'
+        username:'张老师'
+        //username:'张管理员'
     });
 });
 
