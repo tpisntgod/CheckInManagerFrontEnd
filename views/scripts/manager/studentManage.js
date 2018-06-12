@@ -44,17 +44,23 @@ function addEvents() {
     $(".delete_course_student").click(function() {
         console.log($(this).parent().prev().prev());
         var studient_id = $(this).parent().prev().prev().text();
+        var studientname =  $(this).parent().prev().text();
         var delete_url = '/api/course/'+course_id+'/course_member/'+studient_id;
-        axios.delete(delete_url)
-        .then(function(response) {
-            console.log(response.status);
-            alert('删除学生数据成功');
-            window.location='/user/'+ localStorage.getItem("user_id") +'/course/' + localStorage.getItem("course_id") + '/course_member';
-        })
-        .catch(function(error) {
-            console.log(error.response);
-            alert('删除学生失败');
-        });
+
+        var sn = $.trim(studientname);
+        var check = confirm('确认删除学生'+sn+'的信息吗?');
+        if (check === true) {
+            axios.delete(delete_url)
+            .then(function(response) {
+                console.log(response.status);
+                alert('删除学生数据成功');
+                window.location='/user/'+ localStorage.getItem("user_id") +'/course/' + localStorage.getItem("course_id") + '/course_member';
+            })
+            .catch(function(error) {
+                console.log(error.response);
+                alert('删除学生失败');
+            });
+        }
     });
 }
 

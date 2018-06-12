@@ -52,17 +52,23 @@ function addEvents() {
     // 删除某个课程数据
     $(".delete_course").click(function() {
         var course_id = $(this).parent().prev().prev().children().text();
+        var coursename = $(this).parent().prev().text();
         var delete_course_url = '/api/course/'+course_id;
-        axios.delete(delete_course_url)
-        .then(function(response) {
-            console.log(response.status);
-            alert('删除课程数据成功');
-            window.location='/user/' + localStorage.getItem("user_id") + '/course'; 
-        })
-        .catch(function(error) {
-            console.log(error.response);
-            alert('删除课程数据失败');
-        });
+
+        var cn = $.trim(coursename);
+        var check = confirm('确认删除课程'+cn+'的信息吗?');
+        if (check === true) {
+            axios.delete(delete_course_url)
+            .then(function(response) {
+                console.log(response.status);
+                alert('删除课程数据成功');
+                window.location='/user/' + localStorage.getItem("user_id") + '/course'; 
+            })
+            .catch(function(error) {
+                console.log(error.response);
+                alert('删除课程数据失败');
+            });
+        }
     });
 }
 
