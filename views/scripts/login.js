@@ -54,6 +54,7 @@ var loginform = new Vue({
             .catch(function (error) {
                 //alert(error.status);
                 alert(error.response.data.message);
+                alert('登录失败');
             });
         }
     },

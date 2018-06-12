@@ -40,7 +40,6 @@ var addstudentform = new Vue({
                 addstudentform.em2 = '学号格式错误,正确格式:8位数字';
             };
             if (p>0) {
-                alert('false');
                 return false;
             };
 
@@ -59,8 +58,9 @@ var addstudentform = new Vue({
                 }
             })
             .catch(function (error) {
-                //alert(error.status);
+                
                 console.log(error.response.status);
+                alert(error.response.data.message);
             });
         },
         back:function () {
@@ -80,9 +80,9 @@ var addstudentform = new Vue({
                 window.location="/";
             })
             .catch(function (error) {
-                alert(response.data);
+                alert(error.response.data.message);
                 console.log(error);
-                alert(error);
+                alert('添加失败');
             });
         }
     }
