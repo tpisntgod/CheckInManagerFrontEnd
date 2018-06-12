@@ -26,8 +26,17 @@ function addEvents() {
 
     //退出登录
     $("#logout").click(function() {
-        window.location = '/user/login';
-        //alert('a');
+        console.log('cookie',document.cookie);
+        axios.delete('/api/users/session')
+        .then(function (response) {
+            console.log(response.status);
+            window.location="/";
+        })
+        .catch(function (error) {
+            alert(response.data);
+            console.log(error);
+            alert(error);
+        });
     });
 
     //手动添加课程
@@ -48,6 +57,7 @@ function addEvents() {
         .then(function(response) {
             console.log(response.status);
             alert('删除课程数据成功');
+            window.location='/user/' + localStorage.getItem("user_id") + '/course'; 
         })
         .catch(function(error) {
             console.log(error.response);

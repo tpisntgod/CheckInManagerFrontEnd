@@ -20,7 +20,17 @@ function addEvents() {
 
     //退出登录
     $("#logout").click(function() {
-        window.location = '/user/login';
+        console.log('cookie',document.cookie);
+        axios.delete('/api/users/session')
+        .then(function (response) {
+            console.log(response.status);
+            window.location="/";
+        })
+        .catch(function (error) {
+            alert(response.data);
+            console.log(error);
+            alert(error);
+        });
     });
     //管理员手动添加课程学生的页面
     $("#addCourseStudent").click(function() {
@@ -39,6 +49,7 @@ function addEvents() {
         .then(function(response) {
             console.log(response.status);
             alert('删除学生数据成功');
+            window.location='/user/'+ localStorage.getItem("user_id") +'/course/' + localStorage.getItem("course_id") + '/course_member';
         })
         .catch(function(error) {
             console.log(error.response);
