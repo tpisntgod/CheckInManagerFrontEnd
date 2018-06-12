@@ -83,6 +83,13 @@ router.patch('/api/user/password', async (ctx, next) => {
     ctx.response.body = fs.createReadStream('./views/html/teacher/singleAttendancePage.html');
 });*/
 
+router.get('/a', async (ctx, next) => {
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/teacher/attendancePage.html');
+});
+
+
+//--------------------------------------------------------
 
 router.post('/api/users/session',  async (ctx, next) => {
     console.log('login check');

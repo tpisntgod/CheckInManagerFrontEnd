@@ -34,9 +34,12 @@
 //上面的Vue实例，目前没有作用
 
 
-$("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
+
 
 function addEvents() {
+
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
+
     $(".name").click(function() {
         window.location='/course/'+$(this).children().text(); 
     });
@@ -46,7 +49,17 @@ function addEvents() {
     });
     //退出登录
     $("#logout").click(function() {
-        window.location =  '/user/login';
+        console.log('cookie',document.cookie);
+        axios.delete('/api/users/session')
+        .then(function (response) {
+            console.log(response.status);
+            window.location="/";
+        })
+        .catch(function (error) {
+            alert(response.data);
+            console.log(error);
+            alert(error);
+        });
     });
  
 }
