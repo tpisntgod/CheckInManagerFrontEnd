@@ -44,9 +44,11 @@ var checkin = new Vue({
 
 })
 
+$(document).ready(function() {
+    var course_id = localStorage.getItem("course_id");
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！');
 
-
-
-
-var course_id = localStorage.getItem("course_id");
-$("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
+    $("#QRCodePic").attr("src",
+    'http://qr.liantu.com/api.php?text=' + 'http://172.19.93.167:8000/checkinByQRCode/123');
+    localStorage.setItem("checkin_id",123);
+});

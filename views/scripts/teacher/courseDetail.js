@@ -65,14 +65,15 @@ function addEvents() {
         //alert(a);
     });
     $("#studentName").click(function() {
-       window.location =  '/course/'+course_id+'/course_member'; 
+        window.location =  '/course/'+course_id+'/course_member'; 
     });
     $("#signHistory").click(function() {
-      window.location =  '/course/'+course_id+'/checkin_student';
+        window.location =  '/course/'+course_id+'/checkin_student';
     });
     $("#Sign").click(function() {
         //签到界面
         //todo
+        window.location = '/course/'+course_id+'/checkin_course';
     });
     $("#courseList").click(function() {
         window.location = "/course";

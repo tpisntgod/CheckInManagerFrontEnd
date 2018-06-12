@@ -863,10 +863,29 @@ router.get('/user/:user_id/course/:course_id/course_member', async (ctx, next) =
     
 });
 
-router.get('/', async (ctx, next) => {
-   // ctx.response.body = '<h1>Index</h1>';
+// 获取二维码签到页面
+router.get('/course/:course_id/checkin_course', async (ctx, next) => {
+    console.log(ctx.params.course_id);
     ctx.response.type = 'html';
-    ctx.response.body = fs.createReadStream('./views/html/initial.html');
+    ctx.response.body = fs.createReadStream('./views/html/teacher/attendancePage.html');
+});
+
+// 学生扫二维码获取的页面
+router.get('/checkinByQRCode/:checkin_id', async (ctx, next) => {
+    console.log('scan qr code get page');
+    console.log(ctx.params.checkin_id);
+    ctx.response.status = 201;
+    ctx.response.type = 'html';
+    ctx.response.body = fs.createReadStream('./views/html/student/student_checkin.html');
+});
+
+// 学生签到 POST请求
+router.post('/api/checkin_student/:checkin_id', async (ctx, next) => {
+    console.log('student check in');
+    console.log(ctx.params.checkin_id);
+    console.log('student_id:',ctx.request.body.student_id,' student_name:',ctx.request.body.student_name);
+    ctx.response.status = 201;
+    //ctx.response.status = 403;
 });
 
 //管理员：添加全级学生页面
@@ -966,6 +985,12 @@ router.delete('/api/user/:user_id', async (ctx, next) => {
         message:'删除失败'
     });*/
 });
+
+router.get('/', async (ctx, next) => {
+    // ctx.response.body = '<h1>Index</h1>';
+     ctx.response.type = 'html';
+     ctx.response.body = fs.createReadStream('./views/html/initial.html');
+ });
 
 // add router middleware:
 app.use(router.routes());
