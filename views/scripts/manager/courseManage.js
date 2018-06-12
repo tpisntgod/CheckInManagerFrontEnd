@@ -24,6 +24,11 @@ function addEvents() {
          
     });
 
+    // 返回按钮，回退到上个界面
+    $("#backButton").click(function() {
+        window.location='/user';
+    });
+
     //退出登录
     $("#logout").click(function() {
         console.log('cookie',document.cookie);

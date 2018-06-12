@@ -171,7 +171,17 @@ html, body{
   border-radius: 10px;
 }
 
+#backButton{
+  display: inline-block;
+  vertical-align: bottom;
+  position: relative;
+  left: 130px;
+  top: 2px;
+}
+
 #title{
+  position: relative;
+  left: 100px;
   width: auto;
   height: auto;
   margin: 0 0 0 5%;

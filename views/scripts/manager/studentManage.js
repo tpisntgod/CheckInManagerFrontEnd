@@ -32,6 +32,12 @@ function addEvents() {
             alert(error);
         });
     });
+
+    // 返回按钮，回退到上个界面
+    $("#backButton").click(function() {
+        window.location='/user/'+user_id+'/course/';
+    });
+
     //管理员手动添加课程学生的页面
     $("#addCourseStudent").click(function() {
         window.location = '/user/'+user_id+'/course/'+course_id+'/add_course_member';
