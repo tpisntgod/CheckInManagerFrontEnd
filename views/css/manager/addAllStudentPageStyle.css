@@ -9,7 +9,7 @@ html, body{
   margin: 0;
   padding: 0;
   overflow: hidden;
-  min-width:1200px; 
+  min-width:1280px; 
 
   font-family: "Microsoft YaHei", "Century Gothic", cursive;
   color: grey;
@@ -107,7 +107,7 @@ html, body{
   display: inline-block;
   float: right;
   margin-top: 30px;
-  margin-right: 50px;
+  margin-right: 3%;
   font-size: 13px;
   color: black;
   text-align: right;
@@ -115,7 +115,7 @@ html, body{
 }
 
 #teacherHeadList{
-  margin-left: 65%;
+  margin-left: 60%;
 }
 
 #teacherHead{
