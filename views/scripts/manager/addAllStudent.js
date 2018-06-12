@@ -1,3 +1,9 @@
+
+// 欢迎信息显示
+$(document).ready(function() {
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！');
+});
+
 var addstudentform = new Vue({
     el: '#addStudent',
     data: {
