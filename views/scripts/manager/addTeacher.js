@@ -63,9 +63,10 @@ var addTeacherform = new Vue({
                 window.location="/";
             })
             .catch(function (error) {
-                alert(response.data);
+                //alert(response.data);
                 console.log(error);
                 alert(error);
+                alert(response.data.message);
             });
         }
     }

@@ -41,15 +41,20 @@ function addEvents() {
     // 删除某个教师数据 DELETE请求
     $(".delete_teacher").click(function() {
         var teacher_id = $(this).parent().prev().prev().children().text();
-        axios.delete('/api/user/'+teacher_id)
-        .then(function(response) {
-            console.log(response.status);
-            alert('删除教师数据成功');
-        })
-        .catch(function(error) {
-            console.log(error.response);
-            alert('删除教师数据失败');
-        });
+        var teacher_name = $(this).parent().prev().text();
+        var tn = $.trim(teacher_name);
+        var check = confirm('确认删除'+tn+'的信息吗?');
+        if (check === true) {
+            axios.delete('/api/user/'+teacher_id)
+            .then(function(response) {
+                console.log(response.status);
+                alert('删除教师数据成功');
+            })
+            .catch(function(error) {
+                console.log(error.response);
+                alert(error.response.data.message+'，删除教师数据失败');
+            });
+        }        
     });
 }
 

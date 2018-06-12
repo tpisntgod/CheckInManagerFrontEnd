@@ -94,17 +94,20 @@ router.post('/api/users/session',  async (ctx, next) => {
     console.log('ctx.request:',ctx.request);
     console.log('ctx.request.body:',ctx.request.body);
     console.log('user id:',ctx.request.body.user_id,' password:',ctx.request.body.password);
-    /*ctx.response.type = 'json';
-    ctx.response.body = {message: 'empty username or password'};*/
+
+    // 用于测试请求出现错误情况，需要输出服务端返回的错误信息
+    /*ctx.response.status = 401;
+    ctx.response.type = 'json';
+    ctx.response.body = JSON.stringify({
+        message:'empty username or password'
+    });*/
+
     ctx.response.status = 201;
     ctx.response.type = 'json';
     ctx.response.body = JSON.stringify({
         //username:'张老师'
         username:'张管理员'
     });
-    
-
-
 });
 
 router.delete('/api/users/session', async (ctx, next) => {
@@ -937,6 +940,18 @@ router.post('/api/user',  async (ctx, next) => {
 router.delete('/api/user/:user_id', async (ctx, next) => {
     console.log('teacher_id:',ctx.params.user_id);
     ctx.response.status = 201;
+
+    // 用于测试请求出现错误情况，需要输出服务端返回的错误信息
+    /*ctx.response.status = 401;
+    ctx.response.type = 'json';
+    ctx.response.body = JSON.stringify({
+        message:'没有权限'
+    });*/
+    /*ctx.response.status = 400;
+    ctx.response.type = 'json';
+    ctx.response.body = JSON.stringify({
+        message:'删除失败'
+    });*/
 });
 
 // add router middleware:
