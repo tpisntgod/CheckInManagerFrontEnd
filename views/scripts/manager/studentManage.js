@@ -58,7 +58,8 @@ function addEvents() {
             })
             .catch(function(error) {
                 console.log(error.response);
-                alert('删除学生失败');
+                alert(error.response.data.message);
+                alert('删除学生数据失败');
             });
         }
     });

@@ -916,6 +916,7 @@ router.post('/api/course/:course_id/course_member',  async (ctx, next) => {
     console.log(' student_id:',ctx.request.body.student_id, 'student_name', ctx.request.body.student_name);
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
     ctx.response.status = 201;
+
 });
 
 //管理员进入某个课程后 删除某个学生数据
@@ -937,6 +938,13 @@ router.post('/api/user',  async (ctx, next) => {
     console.log(' username:',ctx.request.body.username, 'user_id', ctx.request.body.user_id);
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg');
     ctx.response.status = 201;
+    // 用于测试请求出现错误情况，需要输出服务端返回的错误信息
+   /* ctx.response.status = 401;
+    ctx.response.type = 'json';
+    ctx.response.body = JSON.stringify({
+        message:'没有权限'
+    });*/
+
 });
 
 // 删除某个教师数据

@@ -66,6 +66,7 @@ function addEvents() {
             })
             .catch(function(error) {
                 console.log(error.response);
+                alert(error.response.data.message);
                 alert('删除课程数据失败');
             });
         }

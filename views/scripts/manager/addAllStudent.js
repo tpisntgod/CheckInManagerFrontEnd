@@ -70,13 +70,13 @@ var addstudentform = new Vue({
                 window.location="/";
             })
             .catch(function (error) {
-                alert(response.data);
+                alert(error.response.data.message);
                 console.log(error);
-                alert(error);
+                alert('添加失败')；
             });
         }
     },
     created() {
-        //teacher_name = 
+
     }
 });

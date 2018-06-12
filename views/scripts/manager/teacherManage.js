@@ -64,7 +64,8 @@ function addEvents() {
             })
             .catch(function(error) {
                 console.log(error.response);
-                alert(error.response.data.message+'，删除教师数据失败');
+                alert(error.response.data.message);
+                alert('删除教师数据失败');
             });
         }        
     });

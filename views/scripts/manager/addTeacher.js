@@ -42,10 +42,12 @@ var addTeacherform = new Vue({
                 if (response.status == 201) {
                     window.location="/user";
                 }
+
             })
             .catch(function (error) {
                 //alert(error.status);
                 console.log(error.response.status);
+                alert(error.response.data.message);
             });
         },
         back:function () {
@@ -63,10 +65,9 @@ var addTeacherform = new Vue({
                 window.location="/";
             })
             .catch(function (error) {
-                //alert(response.data);
+                alert(error.response.data.message);
                 console.log(error);
-                alert(error);
-                alert(response.data.message);
+                alert('添加失败')；
             });
         }
     }
