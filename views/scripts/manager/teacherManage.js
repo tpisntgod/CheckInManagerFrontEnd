@@ -52,8 +52,9 @@ function addEvents() {
     $(".delete_teacher").click(function() {
         var teacher_id = $(this).parent().prev().prev().children().text();
         var teacher_name = $(this).parent().prev().text();
+
         var tn = $.trim(teacher_name);
-        var check = confirm('确认删除'+tn+'的信息吗?');
+        var check = confirm('确认删除教师'+tn+'的信息吗?');
         if (check === true) {
             axios.delete('/api/user/'+teacher_id)
             .then(function(response) {
