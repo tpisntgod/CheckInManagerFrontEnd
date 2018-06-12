@@ -49,12 +49,16 @@
 
 //下面是jquery方法的实现
 
-var course_id = localStorage.getItem("course_id");
 
-$("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
 
 
 function addEvents() {
+
+    var course_id = localStorage.getItem("course_id");
+
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
+
+
     $("#mainPage").click(function() {
         window.location='/course/'+course_id;  //要回到课程详情界面就要course_id
     });
@@ -76,7 +80,17 @@ function addEvents() {
         window.location =  '/user/change_password';
     });
     $("#logout").click(function() {
-        window.location =  '/user/login';
+        console.log('cookie',document.cookie);
+        axios.delete('/api/users/session')
+        .then(function (response) {
+            console.log(response.status);
+            window.location="/";
+        })
+        .catch(function (error) {
+            alert(response.data);
+            console.log(error);
+            alert(error);
+        });
     });
 }
 

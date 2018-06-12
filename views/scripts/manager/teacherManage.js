@@ -25,7 +25,17 @@ function addEvents() {
 
     //退出登录
     $("#logout").click(function() {
-        window.location = '/user/login';
+        console.log('cookie',document.cookie);
+        axios.delete('/api/users/session')
+        .then(function (response) {
+            console.log(response.status);
+            window.location="/";
+        })
+        .catch(function (error) {
+            alert(response.data);
+            console.log(error);
+            alert(error);
+        });
     });
 
     //手动添加教师
@@ -49,6 +59,7 @@ function addEvents() {
             .then(function(response) {
                 console.log(response.status);
                 alert('删除教师数据成功');
+                window.location = '/user';
             })
             .catch(function(error) {
                 console.log(error.response);

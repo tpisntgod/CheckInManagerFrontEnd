@@ -46,15 +46,19 @@
 //改用下面的JQuery对象
 
 
-var course_id = $("#courseId").text();
 
-localStorage.setItem("course_id",course_id);//这个界面获得course id，写进浏览器内存
-
-console.log($("#courseId").text());//这个界面，测试服务器返回的课程id假定是1，
 
 
 
 function addEvents() {
+
+    var course_id = $("#courseId").text();
+
+    localStorage.setItem("course_id",course_id);//这个界面获得course id，写进浏览器内存
+
+    console.log($("#courseId").text());//这个界面，测试服务器返回的课程id假定是1，
+
+
     $("#mainPage").click(function() {
         //   window.location='/course/'+$(this).children().text(); 
         //还是返回本界面
@@ -77,7 +81,17 @@ function addEvents() {
         window.location =  '/user/change_password';
     });
     $("#logout").click(function() {
-        window.location =  '/user/login';
+        console.log('cookie',document.cookie);
+        axios.delete('/api/users/session')
+        .then(function (response) {
+            console.log(response.status);
+            window.location="/";
+        })
+        .catch(function (error) {
+            alert(response.data);
+            console.log(error);
+            alert(error);
+        });
     });
 }
 

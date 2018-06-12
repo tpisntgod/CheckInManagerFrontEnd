@@ -84,6 +84,9 @@ router.patch('/api/user/password', async (ctx, next) => {
 });*/
 
 
+
+//--------------------------------------------------------
+
 router.post('/api/users/session',  async (ctx, next) => {
     console.log('login check');
     ctx.cookies.set('key', '3w4e5r6tyuifcgvhbjnkmlvg', {

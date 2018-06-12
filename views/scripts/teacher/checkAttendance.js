@@ -44,13 +44,17 @@
 
 //下面是jquery方法的实现
 
-//注意：这个界面是需要课程详情界面的course_id，无论是回传还是后面界面都要继续用，还没解决
-var course_id = localStorage.getItem("course_id");
 
-$("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
 
 
 function addEvents() {
+
+    //注意：这个界面是需要课程详情界面的course_id，无论是回传还是后面界面都要继续用，还没解决
+    var course_id = localStorage.getItem("course_id");
+
+
+    $("#welcomeInfo").text(localStorage.getItem("username") + '，欢迎您！') ;
+
     $("#mainPage").click(function() {
         window.location='/course/'+course_id;  //要回到课程详情界面就要course_id
     });
@@ -72,12 +76,23 @@ function addEvents() {
         window.location =  '/user/change_password';
     });
     $("#logout").click(function() {
-        window.location =  '/user/login';
+        console.log('cookie',document.cookie);
+        axios.delete('/api/users/session')
+        .then(function (response) {
+            console.log(response.status);
+            window.location="/";
+        })
+        .catch(function (error) {
+            alert(response.data);
+            console.log(error);
+            alert(error);
+        });
     });
 
     //点击进入详情签到界面
     $(".checkSingle").click(function() {
         window.location =  '/course/'+ course_id +'/checkin_student/' + $(this).children().text();
+        localStorage.setItem("checkin_id",$(this).children().text());
     });
 
 }
